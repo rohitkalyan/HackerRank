@@ -17,26 +17,37 @@ import scala.sys._
 import scala.util.matching._
 import scala.reflect._
 
-object Result {
+object Solution {
+
+    // Complete the compareTriplets function below.
     def compareTriplets(a: Array[Int], b: Array[Int]): Array[Int] = {
-    // Write your code here
+    
+    var a1 = 0
+    var b1 = 0
+    var compareArrays = new Array[String](4)
+    for(i <- 0 to a.size - 1){
+    if (a(i) > b(i)){
+    a1 = a1 + 1
+    b1 = b1}
+    else if(a(i) < b(i)){
+    a1 = a1
+    b1 = b1+1}
+    }
+    Array(a1,b1)
 
     }
 
-}
-
-object Solution {
     def main(args: Array[String]) {
         val printWriter = new PrintWriter(sys.env("OUTPUT_PATH"))
 
         val a = StdIn.readLine.replaceAll("\\s+$", "").split(" ").map(_.trim.toInt)
 
         val b = StdIn.readLine.replaceAll("\\s+$", "").split(" ").map(_.trim.toInt)
-
-        val result = Result.compareTriplets(a, b)
+        val result = compareTriplets(a, b)
 
         printWriter.println(result.mkString(" "))
 
         printWriter.close()
     }
 }
+  
