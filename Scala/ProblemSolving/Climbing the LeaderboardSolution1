@@ -1,0 +1,61 @@
+import java.io._
+import java.math._
+import java.security._
+import java.text._
+import java.util.concurrent._
+import java.util.function._
+import java.util.regex._
+import java.util.stream._
+import scala.collection.mutable._
+import scala.concurrent._
+import scala.io._
+import scala.math._
+import scala.sys._
+import scala.util.matching._
+import scala.reflect._
+import scala.collection.mutable
+import scala.collection.immutable.BitSet.empty.ordering
+
+object Result {
+
+    def climbingLeaderboard(ranked: Array[Int], player: Array[Int]): Array[Int] =  {
+        val ranks = new Array[Int](player.size)
+        val distinctScores = ranked.distinct
+        var si = distinctScores.size - 1
+        var ai = 0
+        
+        while (ai < ranks.size) {
+            while( si > 0 && distinctScores(si) < player(ai)) si -= 1
+        
+            ranks(ai) = 
+                if (distinctScores(si) == player(ai)) si + 1
+                else if (si == 0 && distinctScores(si) < player(ai)) 1
+                else si + 2
+            ai += 1
+        }
+        
+        ranks
+    }
+    
+    }
+
+object Solution {
+    def main(args: Array[String]) {
+        var printWriter = new PrintWriter(sys.env("OUTPUT_PATH"))
+        
+        var rankedCount = StdIn.readLine.trim.toInt
+
+        var ranked = StdIn.readLine.replaceAll("\\s+$", "").split(" ").map(_.trim.toInt)
+
+        var playerCount = StdIn.readLine.trim.toInt
+
+        var player = StdIn.readLine.replaceAll("\\s+$", "").split(" ").map(_.trim.toInt)
+
+        var result = Result.climbingLeaderboard(ranked, player)
+
+        printWriter.println(result.mkString("\n"))
+
+        printWriter.close()
+    }
+}
+ 
